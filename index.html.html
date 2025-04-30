@@ -539,6 +539,98 @@
                 <p>&copy; 2023 Chollos al Día. Todos los derechos reservados.</p>
             </div>
         </div>
+
+    <!-- Botón flotante -->
+<a href="https://t.me/tucanal" class="telegram-float" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-telegram"></i>
+</a>
+
+<style>
+    .telegram-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background-color: #0088cc;
+        color: #fff;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 0 4px 12px rgba(0, 136, 204, 0.5);
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+    }
+    
+    .telegram-float:hover {
+        background-color: #006699;
+        transform: scale(1.1);
+        color: white;
+    }
+    
+    .telegram-float::after {
+        content: "Únete a nuestro Telegram";
+        position: absolute;
+        right: 70px;
+        white-space: nowrap;
+        background: #333;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-size: 14px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    .telegram-float:hover::after {
+        opacity: 1;
+    }
+</style>
+4. Banner Promocional
+Añade un banner llamativo en la parte superior:
+
+html
+<!-- Debajo del header -->
+<div class="telegram-banner">
+    <div class="container">
+        <span>📢 Únete a nuestro <strong>canal de Telegram</strong> para no perderte ningún chollo</span>
+        <a href="https://t.me/uncholloaldia" target="_blank" class="btn telegram-btn">
+            <i class="fab fa-telegram"></i> Unirse ahora
+        </a>
+    </div>
+</div>
+
+<style>
+    .telegram-banner {
+        background-color: #e3f2fd;
+        padding: 12px 0;
+        border-bottom: 1px solid #bbdefb;
+    }
+    
+    .telegram-banner .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .telegram-banner span {
+        font-size: 1.1em;
+    }
+    
+    @media (max-width: 768px) {
+        .telegram-banner .container {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .telegram-banner .btn {
+            margin-top: 8px;
+        }
+    }
+</style>
     </footer>
 </body>
 </html>
