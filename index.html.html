@@ -48,6 +48,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
         
         .logo {
@@ -192,7 +193,7 @@
         }
         
         .deal-image {
-            height: 200px;
+            height: 180px;
             overflow: hidden;
         }
         
@@ -356,13 +357,93 @@
             font-size: 0.9rem;
         }
         
+        .telegram-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 12px rgba(238, 67, 67, 0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .telegram-float:hover {
+            background-color: var(--secondary);
+            transform: scale(1.1);
+        }
+        
+        .telegram-float::after {
+            content: "Únete a nuestro Telegram";
+            position: absolute;
+            right: 70px;
+            white-space: nowrap;
+            background: var(--dark);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .telegram-float:hover::after {
+            opacity: 1;
+        }
+        
+        .telegram-banner {
+            background-color: rgba(238, 67, 67, 0.1);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(238, 67, 67, 0.2);
+        }
+        
+        .telegram-banner .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .telegram-banner span {
+            font-size: 1.1em;
+            color: var(--dark);
+        }
+        
+        .visitas {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+        
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
+                align-items: flex-start;
             }
             
             nav ul {
                 margin-top: 1rem;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            nav ul li {
+                margin-left: 0;
             }
             
             .hero h1 {
@@ -372,10 +453,37 @@
             .deals-container {
                 grid-template-columns: 1fr;
             }
+            
+            .telegram-banner .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .telegram-banner .btn {
+                margin-top: 8px;
+            }
+            
+            .visitas {
+                position: static;
+                transform: none;
+                margin-top: 10px;
+                justify-content: center;
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Banner de Telegram -->
+    <div class="telegram-banner">
+        <div class="container">
+            <span>📢 Únete a nuestro <strong>canal de Telegram</strong> para no perderte ningún chollo</span>
+            <a href="https://t.me/uncholloaldia" target="_blank" class="btn telegram-btn">
+                <i class="fab fa-telegram"></i> Unirse ahora
+            </a>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <div class="header-content">
@@ -383,12 +491,16 @@
                     <i class="fas fa-tags"></i>
                     <span>Chollos al Día</span>
                 </div>
+                <div class="visitas">
+                    <i class="fas fa-eye"></i>
+                    <span id="contador-visitas">0</span>
+                </div>
                 <nav>
                     <ul>
                         <li><a href="#">Inicio</a></li>
                         <li><a href="#">Categorías</a></li>
                         <li><a href="#">Top Ofertas</a></li>
-                        <li><a href="#">Nuevos Chollos</a></li>
+                        <li><a href="#nuevos-chollos">Nuevos Chollos</a></li>
                         <li><a href="#">Contacto</a></li>
                     </ul>
                 </nav>
@@ -405,7 +517,7 @@
         <section class="hero">
             <h1>Las mejores ofertas en un solo lugar</h1>
             <p>Descubre los chollos más increíbles de Internet actualizados diariamente. Ahorra hasta un 80% en tus compras.</p>
-            <a href="#" class="btn">Ver ofertas destacadas</a>
+            <a href="#ofertas-destacadas" class="btn">Ver ofertas destacadas</a>
         </section>
         
         <div class="categories">
@@ -419,25 +531,26 @@
             <div class="category">Supermercado</div>
         </div>
         
-        <h2>Ofertas destacadas hoy</h2>
+        <h2 id="ofertas-destacadas">Ofertas destacadas hoy</h2>
         <div class="deals-container">
             <div class="deal-card">
                 <div class="deal-image">
-                    <img src="https://ae01.alicdn.com/kf/Sbe0eb96a9619475b9c735c80441efe841.jpg" alt="Smartphone en oferta">
+                    <img src="https://ae01.alicdn.com/kf/Sbe0eb96a9619475b9c735c80441efe841.jpg" alt="Radio de emergencia">
                 </div>
                 <div class="deal-info">
-                    <h3 class="deal-title">Radio, linterna, bateria, dínamo y manivela para apagones</h3>
+                    <h3 class="deal-title">Radio, linterna y powerbank de emergencia</h3>
                     <div class="deal-price">
                         <span class="current-price">€17,83</span>
-                        
+                        <span class="original-price">€35,99</span>
+                        <span class="discount">50%</span>
                     </div>
-                    <p>Radio de emergencia con manivela, linterna LED y powerbank</p>
+                    <p>Radio con manivela, linterna LED y carga USB</p>
                     <div class="deal-meta">
-
+                        <span><i class="far fa-clock"></i> 12h restantes</span>
+                        <span><i class="fas fa-fire"></i> 245 comprados</span>
                     </div>
                     <div class="deal-actions">
-                    
-                        <a href="https://s.click.aliexpress.com/e/_EGYFBfk" class="btn btn-small">Ver oferta</a>
+                        <a href="https://s.click.aliexpress.com/e/_Evv5uQJ" target="_blank" class="btn btn-small">Ver oferta</a>
                         <a href="#" class="btn btn-small btn-outline"><i class="far fa-heart"></i></a>
                     </div>
                 </div>
@@ -445,311 +558,8 @@
             
             <div class="deal-card">
                 <div class="deal-image">
-                    <img src="https://static.chollometro.com/threads/raw/BghBD/1519899_1/re/1024x1024/qt/60/1519899_1.jpg" alt="Reloj inteligente">
+                    <img src="https://static.chollometro.com/threads/raw/BghBD/1519899_1/re/1024x1024/qt/60/1519899_1.jpg" alt="Hidrolimpiadora">
                 </div>
                 <div class="deal-info">
-                    <h3 class="deal-title">Hidrolimpiadora KÄRCHER K 2 Universal Edition [Envío desde España]
-                    </h3>
-                    <div class="deal-price">
-                        <span class="current-price">€46,67</span>
-                        
-                    </div>
-                    <p>KARCHER INDUSTRIAL 1.673-010.0 - HIDROLIMPIADORA K 2 UNIVERSAL EDITION.</p>
-                    <div class="deal-meta">
-                        
-                    </div>
-                    <div class="deal-actions">
-                        <a href="https://s.click.aliexpress.com/e/_EuPa1wS" class="btn btn-small">Ver oferta</a>
-                        <a href="#" class="btn btn-small btn-outline"><i class="far fa-heart"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="deal-card">
-                <div class="deal-image">
-                    <img src="https://static.chollometro.com/threads/raw/KnrA4/1519823_1/re/1024x1024/qt/60/1519823_1.jpg" alt="Auriculares inalámbricos">
-                </div>
-                <div class="deal-info">
-                    <h3 class="deal-title">Panel solar plegable de 6 pliegues de 800W con USB</h3>
-                    <div class="deal-price">
-                        <span class="current-price">€24,99</span>
-                        <span class="original-price">€49.97</span>
-                    
-                    </div>
-                    <p>anel solar plegable de 6 pliegues, 800W, 20w/h, cargador de paneles solares portátiles, USB, 5V CC, alimentación completa, fuente de alimentación móvil.</p>
-                    <div class="deal-meta">
-                        
-                    </div>
-                    <div class="deal-actions">
-                        <a href="https://s.click.aliexpress.com/e/_EGYFBfk" class="btn btn-small">Ver oferta</a>
-                        <a href="#" class="btn btn-small btn-outline"><i class="far fa-heart"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-         <div class="deals-container">
-            <div class="deal-card">
-                <div class="deal-image">
-                    <img src="https://ae01.alicdn.com/kf/Sbe0eb96a9619475b9c735c80441efe841.jpg" alt="Smartphone en oferta">
-                </div>
-                <div class="deal-info">
-                    <h3 class="deal-title">Radio, linterna, bateria, dínamo y manivela para apagones</h3>
-                    <div class="deal-price">
-                        <span class="current-price">€17,83</span>
-                        
-                    </div>
-                    <p>Radio de emergencia con manivela, linterna LED y powerbank</p>
-                    <div class="deal-meta">
-
-                    </div>
-                    <div class="deal-actions">
-                    
-                        <a href="https://s.click.aliexpress.com/e/_EGYFBfk" class="btn btn-small">Ver oferta</a>
-                        <a href="#" class="btn btn-small btn-outline"><i class="far fa-heart"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="deals-container">
-                <div class="deal-card">
-                    <div class="deal-image">
-                        <img src="https://ae01.alicdn.com/kf/Sbe0eb96a9619475b9c735c80441efe841.jpg" alt="Smartphone en oferta">
-                    </div>
-                    <div class="deal-info">
-                        <h3 class="deal-title">Radio, linterna, bateria, dínamo y manivela para apagones</h3>
-                        <div class="deal-price">
-                            <span class="current-price">€17,83</span>
-                            
-                        </div>
-                        <p>Radio de emergencia con manivela, linterna LED y powerbank</p>
-                        <div class="deal-meta">
-    
-                        </div>
-                        <div class="deal-actions">
-                        
-                            <a href="https://s.click.aliexpress.com/e/_EGYFBfk" class="btn btn-small">Ver oferta</a>
-                            <a href="#" class="btn btn-small btn-outline"><i class="far fa-heart"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="deal-card">
-                    <div class="deal-image">
-                        <img src="https://static.chollometro.com/threads/raw/BghBD/1519899_1/re/1024x1024/qt/60/1519899_1.jpg" alt="Reloj inteligente">
-                    </div>
-                    <div class="deal-info">
-                        <h3 class="deal-title">Hidrolimpiadora KÄRCHER K 2 Universal Edition [Envío desde España]
-                        </h3>
-                        <div class="deal-price">
-                            <span class="current-price">€46,67</span>
-                            
-                        </div>
-                        <p>KARCHER INDUSTRIAL 1.673-010.0 - HIDROLIMPIADORA K 2 UNIVERSAL EDITION.</p>
-                        <div class="deal-meta">
-                            
-                        </div>
-                        <div class="deal-actions">
-                            <a href="https://s.click.aliexpress.com/e/_EuPa1wS" class="btn btn-small">Ver oferta</a>
-                            <a href="#" class="btn btn-small btn-outline"><i class="far fa-heart"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="deal-card">
-                    <div class="deal-image">
-                        <img src="https://static.chollometro.com/threads/raw/KnrA4/1519823_1/re/1024x1024/qt/60/1519823_1.jpg" alt="Auriculares inalámbricos">
-                    </div>
-                    <div class="deal-info">
-                        <h3 class="deal-title">Panel solar plegable de 6 pliegues de 800W con USB</h3>
-                        <div class="deal-price">
-                            <span class="current-price">€24,99</span>
-                            <span class="original-price">€49.97</span>
-                        
-                        </div>
-                        <p>anel solar plegable de 6 pliegues, 800W, 20w/h, cargador de paneles solares portátiles, USB, 5V CC, alimentación completa, fuente de alimentación móvil.</p>
-                        <div class="deal-meta">
-                            
-                        </div>
-                        <div class="deal-actions">
-                            <a href="https://s.click.aliexpress.com/e/_EGYFBfk" class="btn btn-small">Ver oferta</a>
-                            <a href="#" class="btn btn-small btn-outline"><i class="far fa-heart"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="deals-container">
-                <div class="deal-card">
-                    <div class="deal-image">
-                        <img src="https://ae01.alicdn.com/kf/Sbe0eb96a9619475b9c735c80441efe841.jpg" alt="Smartphone en oferta">
-                    </div>
-                    <div class="deal-info">
-                        <h3 class="deal-title">Radio, linterna, bateria, dínamo y manivela para apagones</h3>
-                        <div class="deal-price">
-                            <span class="current-price">€17,83</span>
-                            
-                        </div>
-                        <p>Radio de emergencia con manivela, linterna LED y powerbank</p>
-                        <div class="deal-meta">
-    
-                        </div>
-                        <div class="deal-actions">
-                        
-                            <a href="https://s.click.aliexpress.com/e/_EGYFBfk" class="btn btn-small">Ver oferta</a>
-                            <a href="#" class="btn btn-small btn-outline"><i class="far fa-heart"></i></a>
-                        </div>
-                    </div>
-                </div>
-        
-        <h2>Ofertas flash</h2>
-        <div class="deals-container">
-            <!-- Más tarjetas de ofertas flash -->
-        </div>
-    </main>
-    
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Chollos al Día</h3>
-                    <p>Encuentra las mejores ofertas y descuentos en Internet. Actualizamos nuestras ofertas diariamente para que no te pierdas ningún chollo.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Categorías</h3>
-                    <ul>
-                        <li><a href="#">Electrónica</a></li>
-                        <li><a href="#">Hogar y cocina</a></li>
-                        <li><a href="#">Moda</a></li>
-                        <li><a href="#">Deportes</a></li>
-                        <li><a href="#">Juguetes</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Enlaces útiles</h3>
-                    <ul>
-                        <li><a href="#">Cómo funciona</a></li>
-                        <li><a href="#">Preguntas frecuentes</a></li>
-                        <li><a href="#">Política de privacidad</a></li>
-                        <li><a href="#">Términos y condiciones</a></li>
-                        <li><a href="#">Contacto</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Newsletter</h3>
-                    <p>Suscríbete para recibir los mejores chollos en tu email.</p>
-                    <form>
-                        <input type="email" placeholder="Tu email" style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 4px; border: none;">
-                        <button type="submit" class="btn btn-small" style="width: 100%;">Suscribirse</button>
-                    </form>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 Chollos al Día. Todos los derechos reservados.</p>
-            </div>
-        </div>
-
-    <!-- Botón flotante -->
-<a href="https://t.me/tucanal" class="telegram-float" target="_blank" rel="noopener noreferrer">
-    <i class="fab fa-telegram"></i>
-</a>
-
-<style>
-    .telegram-float {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 60px;
-        height: 60px;
-        background-color: #cc4100;
-        color: #fff;
-        border-radius: 50%;
-        text-align: center;
-        font-size: 30px;
-        box-shadow: 0 4px 12px rgba(0, 136, 204, 0.5);
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s;
-    }
-    
-    .telegram-float:hover {
-        background-color: #006699;
-        transform: scale(1.1);
-        color: white;
-    }
-    
-    .telegram-float::after {
-        content: "Únete a nuestro Telegram";
-        position: absolute;
-        right: 70px;
-        white-space: nowrap;
-        background: #333;
-        color: rgb(11, 5, 1);
-        padding: 8px 15px;
-        border-radius: 5px;
-        font-size: 14px;
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-    
-    .telegram-float:hover::after {
-        opacity: 1;
-    }
-</style>
-
-
-
-<!-- Debajo del header -->
-<div class="telegram-banner">
-    <div class="container">
-        <span>📢 Únete a nuestro <strong>canal de Telegram</strong> para no perderte ningún chollo</span>
-        <a href="https://t.me/uncholloaldia" target="_blank" class="btn telegram-btn">
-            <i class="fab fa-telegram"></i> Unirse ahora
-        </a>
-    </div>
-</div>
-
-<style>
-    .telegram-banner {
-        background-color: #fbfde3;
-        padding: 12px 0;
-        border-bottom: 1px solid #bbd2fb;
-    }
-    
-    .telegram-banner .container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    .telegram-banner span {
-        font-size: 1.1em;
-    }
-    
-    @media (max-width: 768px) {
-        .telegram-banner .container {
-            flex-direction: column;
-            text-align: center;
-        }
-        
-        .telegram-banner .btn {
-            margin-top: 8px;
-        }
-    }
-
-    <div class="visitas">
-    <i class="fas fa-eye"></i>
-    <span id="contador-visitas">0</span>
-</div>
-
-</style>
-    </footer>
-</body>
-</html>
+                    <h3 class="deal-title">Hidrolimpiadora KÄRCHER K2</h3>
+                   
